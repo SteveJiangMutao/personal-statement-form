@@ -150,25 +150,27 @@
 
         /* 问题卡片样式 */
         .card {
-            background: linear-gradient(135deg, #4B0082 0%, #9370DB 50%, #002FA7 100%);
+            background: #f5f0fa;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 30px;
             margin-bottom: 30px;
             transform-style: preserve-3d;
             transition: transform 0.6s;
-            color: white;
+            color: #333;
+            border: 2px solid #4B0082;
         }
 
         .card h2 {
             font-size: 1.8em;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(75, 0, 130, 0.3);
             padding-bottom: 10px;
             margin-top: 0;
+            color: #4B0082;
         }
 
         .card-purpose {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(75, 0, 130, 0.05);
             padding: 15px;
             border-radius: 10px;
             margin: 15px 0;
@@ -179,32 +181,34 @@
         .card-purpose-title {
             font-weight: bold;
             margin-bottom: 8px;
+            color: #4B0082;
         }
 
-        /* 文本区域样式 */
+        /* 文本区域样式 - 白色背景版本 */
         .answer-area {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: #FFFFFF;
+            border: 1px solid #4B0082;
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px;
             width: 100%;
-            min-height: 150px;
-            color: white;
+            min-height: 300px; /* 更长的回答框 */
+            color: #333;
             font-size: 1em;
             font-family: inherit;
             box-sizing: border-box;
             resize: vertical;
             margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .answer-area::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: #999;
         }
 
         .answer-area:focus {
             outline: none;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid #4B0082;
+            box-shadow: 0 2px 15px rgba(75, 0, 130, 0.15);
         }
 
         /* 按钮样式 */
@@ -238,7 +242,8 @@
         }
 
         .btn-prev {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(75, 0, 130, 0.2);
+            color: #4B0082;
         }
         
         .btn-confirm {
@@ -273,13 +278,13 @@
         
         .word-count {
             font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.8);
+            color: #666;
             text-align: right;
             margin-top: 10px;
         }
 
         .required-marker {
-            color: #FFD700;
+            color: #FF4500;
             font-weight: bold;
         }
 
@@ -362,10 +367,11 @@
     </div>
 
     <script>
-        // 个人陈述问题数据（移除了所有example部分）
+        // 个人陈述问题数据
         const questions = [
             {
                 id: 1,
+                title: "专业动机",
                 question: "对所申请的专业的兴趣来源或动力，为什么要在这个专业读一个硕士学位？",
                 purpose: "这个问题旨在了解您选择该专业的个人动机和背景。招生官希望看到您对所申领域有深入了解和真诚热情，而非随意选择。同时，硕士学位意味着更深层次的学习承诺，您需要清晰表达为何本科学位对您来说不够。",
                 placeholder: "请描述您对所申请专业的兴趣来源，以及为何需要攻读硕士学位（500字以内）...",
@@ -374,6 +380,7 @@
             },
             {
                 id: 2,
+                title: "学习经历",
                 question: "通过本科学习以及课外学习，你学到了什么和申请专业相关的知识和技能？",
                 purpose: "这个问题帮助招生官评估您是否具备足够的学术背景和知识基础来应对硕士阶段的学习。请具体说明您学过的相关课程、掌握的技能和研究方法，而非简单列举课程名称。如有优异成绩或荣誉，请着重强调。",
                 placeholder: "请详细描述您在本科学习中获得的与申请专业相关的知识和技能...",
@@ -382,6 +389,7 @@
             },
             {
                 id: 3,
+                title: "研究经历",
                 question: "和申请专业相关的研究/项目经历（如有）",
                 purpose: "此问题主要针对基础学科(如理工科、哲学、社科)的申请者，展示您的研究能力和专业素养。若您有丰富的实习经历，这部分可以简略。请详细说明项目内容、您的角色、负责工作、遇到的困难及解决方案，以及取得的成就。",
                 placeholder: "请描述您参与过的与申请专业相关的研究或项目经历...",
@@ -390,6 +398,7 @@
             },
             {
                 id: 4,
+                title: "社会活动",
                 question: "和所申请专业相关的社会活动经历（如有）",
                 purpose: "此问题旨在了解您在学术之外的社会参与和领导能力。优秀的社会活动经历可以展示您的团队合作、组织协调和解决问题的能力。请具体说明活动时间、地点、内容、您的角色和取得的成果。",
                 placeholder: "请描述您参与过的与申请专业相关的社会活动经历...",
@@ -398,6 +407,7 @@
             },
             {
                 id: 5,
+                title: "实习经历",
                 question: "和申请专业相关的实习经历（如有）",
                 purpose: "此问题帮助招生官评估您的实践经验和对所申领域的实际接触。好的实习经历能展示您将理论知识应用到实际工作中的能力。请详述您的实习单位、职责、成就及从中学到的技能。",
                 placeholder: "请描述您的实习经历，包括实习单位、职责、项目内容和收获...",
@@ -406,6 +416,7 @@
             },
             {
                 id: 6,
+                title: "职业规划",
                 question: "申请此专业和院校对你未来的职业规划有什么帮助？",
                 purpose: "硕士课程通常被视为通往特定职业道路的跳板，招生官希望确保您有明确的职业规划，而该课程能够帮助您实现目标。请具体说明该项目如何与您的短期和长期职业目标相契合，以及为何这所院校是理想选择。",
                 placeholder: "请阐述这个专业和院校如何有助于您实现未来的职业目标...",
@@ -414,6 +425,7 @@
             },
             {
                 id: 7,
+                title: "个人特质",
                 question: "你认为自己符合这个专业的哪些特质？（例如：MFE需要数学好、编程好、金融好，Media需要传播学背景和新媒体运营经验等）",
                 purpose: "这个问题帮助招生官评估您对所申请专业要求的理解，以及您是否具备成功完成该课程的特质和能力。请展示您对该领域的认知，以及您如何将自己的背景和技能与该专业的要求匹配起来。",
                 placeholder: "请描述您认为自己具备哪些与申请专业相符的特质和能力...",
@@ -422,6 +434,7 @@
             },
             {
                 id: 8,
+                title: "申请挑战",
                 question: "在准备申请中，你遇到的最大的瓶颈或困难是什么？",
                 purpose: "这个问题旨在了解您在申请过程中的挑战和应对方式。坦诚地分享您的困难和如何克服这些困难，可以展示您的解决问题能力和面对挑战的态度。",
                 placeholder: "请描述您在申请准备过程中遇到的主要困难或挑战...",
@@ -466,7 +479,7 @@
             questions.forEach((q, index) => {
                 const navItem = document.createElement('li');
                 navItem.className = 'nav-item';
-                navItem.textContent = `问题 ${index + 1}`;
+                navItem.textContent = q.title;
                 navItem.onclick = function() {
                     if (saveAnswer()) {
                         currentQuestion = index;
@@ -519,8 +532,15 @@
             
             // 问题标题和编号
             const questionTitle = document.createElement('h2');
-            questionTitle.innerHTML = `问题 ${index + 1}${q.required ? ' <span class="required-marker">*</span>' : ''}: ${q.question}`;
+            questionTitle.innerHTML = `${q.title}${q.required ? ' <span class="required-marker">*</span>' : ''}`;
             card.appendChild(questionTitle);
+            
+            // 问题描述
+            const questionDesc = document.createElement('p');
+            questionDesc.textContent = q.question;
+            questionDesc.style.fontSize = '1.1em';
+            questionDesc.style.marginBottom = '20px';
+            card.appendChild(questionDesc);
             
             // 问题目的
             const purposeDiv = document.createElement('div');
@@ -617,9 +637,9 @@
             wordCountElement.textContent = `${count}/${limit} 字`;
             
             if (count > limit) {
-                wordCountElement.style.color = '#FFD700';
+                wordCountElement.style.color = '#FF4500';
             } else {
-                wordCountElement.style.color = 'rgba(255, 255, 255, 0.8)';
+                wordCountElement.style.color = '#666';
             }
         }
         
@@ -672,7 +692,7 @@
             let content = '木桃留学个人陈述信息收集\n\n';
             
             questions.forEach(q => {
-                content += q.question + '\n\n';
+                content += `${q.title}: ${q.question}\n\n`;
                 content += answers[q.id] ? answers[q.id] : '未回答';
                 content += '\n\n----------------------------\n\n';
             });
