@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木桃留学个人陈述信息收集</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 标题样式 */
+        .header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 2em;
+            margin: 0;
+            text-align: center;
+            width: 100%;
+            padding: 20px 0;
+            color: #4B0082;
+            font-weight: bold;
+        }
+
+        /* 欢迎页面样式 */
+        .welcome-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        /* 说明框样式 */
+        .info-box {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto 30px;
+            padding: 30px;
+            background-color: #f9f0ff;
+            border-left: 5px solid #4B0082;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #4B0082;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .info-box p {
+            line-height: 1.8;
+            margin-bottom: 0;
+            font-size: 1.1em;
+        }
+
+        /* LOGO位置 - 右上角 */
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 导航菜单 */
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+            width: 90%;
+            max-width: 800px;
+            gap: 10px;
+        }
+
+        .nav-item {
+            background: rgba(75, 0, 130, 0.1);
+            border: 2px solid rgba(75, 0, 130, 0.2);
+            color: #4B0082;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: rgba(75, 0, 130, 0.2);
+        }
+
+        .nav-item.active {
+            background: #4B0082;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 进度条样式 */
+        .progress-container {
+            width: 80%;
+            max-width: 800px;
+            height: 15px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+            display: none; /* 初始隐藏 */
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #4B0082 0%, #9370DB 50%, #002FA7 100%);
+            width: 0;
+            transition: width 0.5s ease;
+        }
+
+        /* 卡片容器 */
+        .card-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            perspective: 1000px;
+            display: none; /* 初始隐藏 */
+        }
+
+        /* 问题卡片样式 */
+        .card {
+            background: linear-gradient(135deg, #4B0082 0%, #9370DB 50%, #002FA7 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            color: white;
+        }
+
+        .card h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .card-purpose {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .card-purpose-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        /* 文本区域样式 */
+        .answer-area {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            width: 100%;
+            min-height: 150px;
+            color: white;
+            font-size: 1em;
+            font-family: inherit;
+            box-sizing: border-box;
+            resize: vertical;
+            margin-top: 20px;
+        }
+
+        .answer-area::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .answer-area:focus {
+            outline: none;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* 按钮样式 */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4B0082 0%, #9370DB 50%, #002FA7 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 12px 30px;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(75, 0, 130, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0px);
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-confirm {
+            font-size: 1.3em;
+            padding: 15px 40px;
+        }
+
+        /* 完成页面样式 */
+        .completion-container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 30px auto;
+            display: none;
+            text-align: center;
+        }
+
+        .completion-title {
+            color: #4B0082;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .completion-message {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .word-count {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .required-marker {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 1.5em;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            
+            .info-box {
+                padding: 20px;
+            }
+            
+            .nav-menu {
+                gap: 5px;
+            }
+            
+            .nav-item {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="title">木桃留学个人陈述信息收集</h1>
+        <div class="logo">
+            <!-- 这里是 Logo 的位置，可以替换为您的 Base64 图片代码 -->
+            <img src="data:image/png;base64,LOGO_BASE64_CODE_HERE" alt="木桃留学 Logo">
+        </div>
+    </header>
+
+    <!-- 欢迎页面和说明 -->
+    <div class="welcome-container" id="welcome-container">
+        <div class="info-box">
+            <h3>填写前重要说明</h3>
+            <p>亲爱的申请者：请放心填写此表格，您提供的信息<strong>不会</strong>被直接照搬翻译成文书。这些内容将作为我们顾问团队与您进行头脑风暴和深入交流的基础材料，帮助我们更好地了解您的背景、经历和目标。</p>
+            <p><br>我们的专业文书顾问会基于这些信息为您量身定制个性化的申请文书，展现您的独特优势和潜力。请尽可能详细地回答问题，这将有助于我们更好地了解您的情况。</p>
+        </div>
+        <button class="btn btn-confirm" id="confirm-btn">我已阅读并理解，开始填写</button>
+    </div>
+
+    <!-- 导航菜单 - 初始隐藏 -->
+    <ul class="nav-menu hidden" id="nav-menu">
+        <!-- 导航项目将通过JS动态生成 -->
+    </ul>
+
+    <!-- 进度条 -->
+    <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- 问题卡片容器 -->
+    <div class="card-container" id="form-container">
+        <!-- 问题卡片会通过 JavaScript 动态生成 -->
+    </div>
+
+    <!-- 完成页面 -->
+    <div class="completion-container" id="completion-container">
+        <h2 class="completion-title">信息收集完成</h2>
+        <div class="completion-message">
+            感谢您提供的详细信息！我们的文书顾问将基于这些内容为您定制最合适的个人陈述文书。
+            <br><br>
+            您的所有回答已经保存，请等待木桃留学的顾问与您联系。
+        </div>
+        <button class="btn" onclick="downloadAnswers()">下载我的回答</button>
+    </div>
+
+    <script>
+        // 个人陈述问题数据（移除了所有example部分）
+        const questions = [
+            {
+                id: 1,
+                question: "对所申请的专业的兴趣来源或动力，为什么要在这个专业读一个硕士学位？",
+                purpose: "这个问题旨在了解您选择该专业的个人动机和背景。招生官希望看到您对所申领域有深入了解和真诚热情，而非随意选择。同时，硕士学位意味着更深层次的学习承诺，您需要清晰表达为何本科学位对您来说不够。",
+                placeholder: "请描述您对所申请专业的兴趣来源，以及为何需要攻读硕士学位（500字以内）...",
+                wordLimit: 500,
+                required: true
+            },
+            {
+                id: 2,
+                question: "通过本科学习以及课外学习，你学到了什么和申请专业相关的知识和技能？",
+                purpose: "这个问题帮助招生官评估您是否具备足够的学术背景和知识基础来应对硕士阶段的学习。请具体说明您学过的相关课程、掌握的技能和研究方法，而非简单列举课程名称。如有优异成绩或荣誉，请着重强调。",
+                placeholder: "请详细描述您在本科学习中获得的与申请专业相关的知识和技能...",
+                wordLimit: 800,
+                required: true
+            },
+            {
+                id: 3,
+                question: "和申请专业相关的研究/项目经历（如有）",
+                purpose: "此问题主要针对基础学科(如理工科、哲学、社科)的申请者，展示您的研究能力和专业素养。若您有丰富的实习经历，这部分可以简略。请详细说明项目内容、您的角色、负责工作、遇到的困难及解决方案，以及取得的成就。",
+                placeholder: "请描述您参与过的与申请专业相关的研究或项目经历...",
+                wordLimit: 600,
+                required: false
+            },
+            {
+                id: 4,
+                question: "和所申请专业相关的社会活动经历（如有）",
+                purpose: "此问题旨在了解您在学术之外的社会参与和领导能力。优秀的社会活动经历可以展示您的团队合作、组织协调和解决问题的能力。请具体说明活动时间、地点、内容、您的角色和取得的成果。",
+                placeholder: "请描述您参与过的与申请专业相关的社会活动经历...",
+                wordLimit: 600,
+                required: false
+            },
+            {
+                id: 5,
+                question: "和申请专业相关的实习经历（如有）",
+                purpose: "此问题帮助招生官评估您的实践经验和对所申领域的实际接触。好的实习经历能展示您将理论知识应用到实际工作中的能力。请详述您的实习单位、职责、成就及从中学到的技能。",
+                placeholder: "请描述您的实习经历，包括实习单位、职责、项目内容和收获...",
+                wordLimit: 800,
+                required: false
+            },
+            {
+                id: 6,
+                question: "申请此专业和院校对你未来的职业规划有什么帮助？",
+                purpose: "硕士课程通常被视为通往特定职业道路的跳板，招生官希望确保您有明确的职业规划，而该课程能够帮助您实现目标。请具体说明该项目如何与您的短期和长期职业目标相契合，以及为何这所院校是理想选择。",
+                placeholder: "请阐述这个专业和院校如何有助于您实现未来的职业目标...",
+                wordLimit: 500,
+                required: true
+            },
+            {
+                id: 7,
+                question: "你认为自己符合这个专业的哪些特质？（例如：MFE需要数学好、编程好、金融好，Media需要传播学背景和新媒体运营经验等）",
+                purpose: "这个问题帮助招生官评估您对所申请专业要求的理解，以及您是否具备成功完成该课程的特质和能力。请展示您对该领域的认知，以及您如何将自己的背景和技能与该专业的要求匹配起来。",
+                placeholder: "请描述您认为自己具备哪些与申请专业相符的特质和能力...",
+                wordLimit: 500,
+                required: true
+            },
+            {
+                id: 8,
+                question: "在准备申请中，你遇到的最大的瓶颈或困难是什么？",
+                purpose: "这个问题旨在了解您在申请过程中的挑战和应对方式。坦诚地分享您的困难和如何克服这些困难，可以展示您的解决问题能力和面对挑战的态度。",
+                placeholder: "请描述您在申请准备过程中遇到的主要困难或挑战...",
+                wordLimit: 300,
+                required: true
+            }
+        ];
+        
+        // 用于存储答案的对象
+        const answers = {};
+        
+        // 当前问题索引
+        let currentQuestion = 0;
+        
+        // 初始化表单和事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加确认按钮的事件监听
+            document.getElementById('confirm-btn').addEventListener('click', function() {
+                // 隐藏欢迎页面
+                document.getElementById('welcome-container').style.display = 'none';
+                
+                // 显示导航菜单、进度条和表单
+                document.getElementById('nav-menu').classList.remove('hidden');
+                document.getElementById('progress-container').style.display = 'block';
+                document.getElementById('form-container').style.display = 'block';
+                
+                // 显示第一个问题
+                showQuestion(currentQuestion);
+                updateProgressBar();
+                updateNavMenu();
+            });
+            
+            // 初始化导航菜单
+            initNavMenu();
+        });
+        
+        // 初始化导航菜单
+        function initNavMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const navItem = document.createElement('li');
+                navItem.className = 'nav-item';
+                navItem.textContent = `问题 ${index + 1}`;
+                navItem.onclick = function() {
+                    if (saveAnswer()) {
+                        currentQuestion = index;
+                        showQuestion(currentQuestion);
+                        updateProgressBar();
+                        updateNavMenu();
+                    }
+                };
+                navMenu.appendChild(navItem);
+            });
+            
+            // 添加"完成"选项
+            const completeItem = document.createElement('li');
+            completeItem.className = 'nav-item';
+            completeItem.textContent = '完成';
+            completeItem.onclick = function() {
+                if (saveAnswer()) {
+                    if (validateAllRequiredQuestions()) {
+                        completeForm();
+                    } else {
+                        alert('还有必答题未完成，请检查并填写所有必答题。');
+                    }
+                }
+            };
+            navMenu.appendChild(completeItem);
+        }
+        
+        // 更新导航菜单的活动状态
+        function updateNavMenu() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach((item, index) => {
+                if (index === currentQuestion && index < questions.length) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // 显示指定索引的问题
+        function showQuestion(index) {
+            const formContainer = document.getElementById('form-container');
+            formContainer.innerHTML = '';
+            
+            const q = questions[index];
+            
+            // 创建问题卡片
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            // 问题标题和编号
+            const questionTitle = document.createElement('h2');
+            questionTitle.innerHTML = `问题 ${index + 1}${q.required ? ' <span class="required-marker">*</span>' : ''}: ${q.question}`;
+            card.appendChild(questionTitle);
+            
+            // 问题目的
+            const purposeDiv = document.createElement('div');
+            purposeDiv.className = 'card-purpose';
+            
+            const purposeTitle = document.createElement('div');
+            purposeTitle.className = 'card-purpose-title';
+            purposeTitle.textContent = '这个问题的目的:';
+            purposeDiv.appendChild(purposeTitle);
+            
+            const purposeText = document.createElement('div');
+            purposeText.textContent = q.purpose;
+            purposeDiv.appendChild(purposeText);
+            
+            card.appendChild(purposeDiv);
+            
+            // 答案输入区域
+            const textarea = document.createElement('textarea');
+            textarea.className = 'answer-area';
+            textarea.id = 'answer-input';
+            textarea.placeholder = q.placeholder;
+            textarea.value = answers[q.id] || '';
+            textarea.addEventListener('input', function() {
+                updateWordCount(this.value, q.wordLimit);
+            });
+            card.appendChild(textarea);
+            
+            // 字数统计
+            const wordCountDiv = document.createElement('div');
+            wordCountDiv.className = 'word-count';
+            wordCountDiv.id = 'word-count';
+            wordCountDiv.textContent = `0/${q.wordLimit} 字`;
+            card.appendChild(wordCountDiv);
+            
+            // 导航按钮
+            const btnContainer = document.createElement('div');
+            btnContainer.className = 'btn-container';
+            
+            if (index > 0) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'btn btn-prev';
+                prevBtn.textContent = '上一题';
+                prevBtn.onclick = function() {
+                    if (saveAnswer()) {
+                        currentQuestion--;
+                        showQuestion(currentQuestion);
+                        updateProgressBar();
+                        updateNavMenu();
+                    }
+                };
+                btnContainer.appendChild(prevBtn);
+            }
+            
+            if (index < questions.length - 1) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'btn';
+                nextBtn.textContent = '下一题';
+                nextBtn.onclick = function() {
+                    if (saveAnswer()) {
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                        updateProgressBar();
+                        updateNavMenu();
+                    }
+                };
+                btnContainer.appendChild(nextBtn);
+            } else {
+                const completeBtn = document.createElement('button');
+                completeBtn.className = 'btn';
+                completeBtn.textContent = '完成';
+                completeBtn.onclick = function() {
+                    if (saveAnswer()) {
+                        if (validateAllRequiredQuestions()) {
+                            completeForm();
+                        } else {
+                            alert('还有必答题未完成，请检查并填写所有必答题。');
+                        }
+                    }
+                };
+                btnContainer.appendChild(completeBtn);
+            }
+            
+            card.appendChild(btnContainer);
+            formContainer.appendChild(card);
+            
+            // 更新字数统计
+            updateWordCount(textarea.value, q.wordLimit);
+        }
+        
+        // 更新字数统计
+        function updateWordCount(text, limit) {
+            const count = text.length;
+            const wordCountElement = document.getElementById('word-count');
+            wordCountElement.textContent = `${count}/${limit} 字`;
+            
+            if (count > limit) {
+                wordCountElement.style.color = '#FFD700';
+            } else {
+                wordCountElement.style.color = 'rgba(255, 255, 255, 0.8)';
+            }
+        }
+        
+        // 更新进度条
+        function updateProgressBar() {
+            const progressPercentage = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+        }
+        
+        // 保存当前问题的答案
+        function saveAnswer() {
+            const answerInput = document.getElementById('answer-input');
+            if (!answerInput) return true;
+            
+            const questionId = questions[currentQuestion].id;
+            answers[questionId] = answerInput.value;
+            
+            // 验证必答题
+            if (questions[currentQuestion].required && answerInput.value.trim() === '') {
+                alert('这是必答题，请填写答案后再继续。');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // 验证所有必答题是否已完成
+        function validateAllRequiredQuestions() {
+            let allCompleted = true;
+            
+            questions.forEach(q => {
+                if (q.required && (!answers[q.id] || answers[q.id].trim() === '')) {
+                    allCompleted = false;
+                }
+            });
+            
+            return allCompleted;
+        }
+        
+        // 完成表单
+        function completeForm() {
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('progress-container').style.display = 'none';
+            document.getElementById('nav-menu').classList.add('hidden');
+            document.getElementById('completion-container').style.display = 'block';
+        }
+        
+        // 下载答案
+        function downloadAnswers() {
+            let content = '木桃留学个人陈述信息收集\n\n';
+            
+            questions.forEach(q => {
+                content += q.question + '\n\n';
+                content += answers[q.id] ? answers[q.id] : '未回答';
+                content += '\n\n----------------------------\n\n';
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '木桃留学_个人陈述信息.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
